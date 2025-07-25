@@ -10,6 +10,10 @@ pnpm-debug.log*
 .env.*
 !.env.example
 
+# Uploads
+uploads/*
+!uploads/.gitkeep
+
 # Build outputs
 dist/
 build/
