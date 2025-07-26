@@ -1,5 +1,10 @@
-const questionAnswerPrompt = (role, experience, topicsToFocus, numberOfQuestions) => (
-`You are an AI trained to generate technical interview questions and answers.
+const questionAnswerPrompt = (
+  role,
+  experience,
+  topicsToFocus,
+  numberOfQuestions
+) =>
+  `You are an AI trained to generate technical interview questions and answers.
 
 Task:
 - Role: ${role}
@@ -20,10 +25,10 @@ Task:
 ]
 
 Important: Do NOT add any extra text. Only return valid JSON.
-`);
+`;
 
-const conceptExplainPrompt = (question) => (
-`You are an AI trained to generate explanations for a given interview question.
+const conceptExplainPrompt = (question) =>
+  `You are an AI trained to generate explanations for a given interview question.
 
 Task:
 - Explain the following interview question and its concept in depth as if you're teaching a beginner developer.
@@ -39,6 +44,6 @@ Task:
 }
 
 Important: Do NOT add any extra text outside the JSON format. Only return valid JSON.
-`);
+`;
 
 module.exports = { questionAnswerPrompt, conceptExplainPrompt };

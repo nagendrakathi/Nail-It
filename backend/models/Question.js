@@ -9,8 +9,8 @@ const questionSchema = new mongoose.Schema(
     isPinned: { type: Boolean, default: false },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 );
 
-module.exports=mongoose.model('Question', questionSchema)
+module.exports = mongoose.model("Question", questionSchema);
