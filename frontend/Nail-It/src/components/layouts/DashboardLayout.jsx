@@ -10,7 +10,7 @@ const DashboardLayout = ({children}) => {
         
         {user && <div>{children}</div>}
     </div>
-  )
-}
+  );
+};
 
-export default DashboardLayout
+export default DashboardLayout;

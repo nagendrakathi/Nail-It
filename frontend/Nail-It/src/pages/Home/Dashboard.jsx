@@ -9,6 +9,8 @@ import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import SummaryCard from "../../components/Cards/SummaryCard";
 import moment from "moment"
+import Modal from "../../components/Modal";
+import CreateSessionForm from "./CreateSessionForm"
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -46,11 +48,11 @@ const Dashboard = () => {
               role={data?.role || ""}
               topicsToFocus={data?.topicsToFocus || ""}
               experience={data?.experience || "-"}
-              questions={data?.questions || "-"}
+              questions={data?.questions?.length || "-"}
               description={data?.description || ""}
               lastUpdated={
                 data?.updatedAt
-                  ? moment(data.updatedAt).format("Do MM YYYY")
+                  ? moment(data.updatedAt).format("Do MMMM YYYY")
                   : ""
               }
               onSelect={() => navigate(`/nail-it/${data?._id}`)}
@@ -66,6 +68,14 @@ const Dashboard = () => {
           Add New
         </button>
       </div>
+      <Modal
+      isOpen={openCreateModal}
+      onClose={()=>{setOpenCreateModal(false)}}
+      hideHeader>
+        <div>
+          <CreateSessionForm/>
+        </div>
+      </Modal>
     </DashboardLayout>
   );
 };
