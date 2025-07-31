@@ -5,42 +5,41 @@ const RoleInfoHeader = ({
   topicsToFocus,
   experience,
   questions,
-  description,
+  description, // currently unused; optionally render or remove
   lastUpdated,
 }) => {
   return (
-    <div className="bg-white relative">
-      <div className="container mx-auto px-10 md:px-0">
+    <div className="bg-white relative overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 md:px-0">
         <div className="h-[200px] flex flex-col justify-center relative z-10">
-          <div className="flex items-center">
-            <div className="flex-grow">
-              <div className="flex justify-between items-start">
-                <div>
-                  <h2 className="text-2xl font-medium">{role}</h2>
-                  <p className="text-sm text-medium text-gray-900 mt-1">
-                    {topicsToFocus}
-                  </p>
-                </div>
+          <div>
+            <div className="flex justify-between items-start">
+              <div>
+                <h2 className="text-2xl font-medium text-black">{role}</h2>
+                <p className="text-sm text-gray-900 mt-1">{topicsToFocus}</p>
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-3 mt-4">
-            <div className="text-[10px] font-semibold text-white bg-black px-3 py-1 rounded-full">
-              Experience: {experience} {experience == 1 ? "Year" : "Years"}
+
+          <div className="flex flex-wrap items-center gap-3 mt-4 max-w-full">
+            <div className="text-xs sm:text-sm font-semibold text-white bg-black px-3 py-1 rounded-full whitespace-nowrap">
+              Experience: {experience} {experience === 1 ? "Year" : "Years"}
             </div>
-            <div className="text-[10px] font-semibold text-white bg-black px-3 py-1 rounded-full">
+            <div className="text-xs sm:text-sm font-semibold text-white bg-black px-3 py-1 rounded-full whitespace-nowrap">
               {questions} Q&A
             </div>
-            <div className="text-[10px] font-semibold text-white bg-black px-3 py-1 rounded-full">
-              LastUpdated: {lastUpdated}
+            <div className="text-xs sm:text-sm font-semibold text-white bg-black px-3 py-1 rounded-full whitespace-nowrap">
+              Last Updated: {lastUpdated}
             </div>
           </div>
         </div>
-        <div className="w-[40vw] md:w-[30vw] h-[200px] flex items-center justify-center bg-white overflow-hidden absolute top-0 right-0">
-          <div className="w-16 h-16 bg-lime-400 blur-[65px] animate-blob1" />
-          <div className="w-16 h-16 bg-teal-400 blur-[65px] animate-blob2" />
-          <div className="w-16 h-16 bg-cyan-300 blur-[45px] animate-blob3" />
-          <div className="w-16 h-16 bg-fuchsia-200 blur-[45px] animate-blob4" />
+
+        {/* Decorative Blobs */}
+        <div className="hidden md:flex w-[40vw] max-w-[400px] h-[200px] items-center justify-center absolute top-0 right-0 pointer-events-none overflow-visible">
+          <div className="w-16 h-16 bg-lime-400 blur-[65px] animate-blob1 rounded-full" />
+          <div className="w-16 h-16 bg-teal-400 blur-[65px] animate-blob2 rounded-full" />
+          <div className="w-16 h-16 bg-cyan-300 blur-[45px] animate-blob3 rounded-full" />
+          <div className="w-16 h-16 bg-fuchsia-200 blur-[45px] animate-blob4 rounded-full" />
         </div>
       </div>
     </div>

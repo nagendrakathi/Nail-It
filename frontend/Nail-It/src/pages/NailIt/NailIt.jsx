@@ -158,7 +158,7 @@ const NailIt = () => {
                 <LuCircleAlert className="mt-1"/>{errorMsg}
               </p>
             )}
-            {!isLoading&&<SkeletonLoader/>}
+            {isLoading&&<SkeletonLoader/>}
             {!isLoading&& explanation&&(
               <AIResponsePreview content={explanation?.explanation}/>
             )}
