@@ -33,6 +33,7 @@ const SpinnerLoader = () => {
           fill="currentFill"
         />
       </svg>
+      <span className="sr-only">Loading...</span>
     </div>
   );
 };

@@ -21,7 +21,6 @@ const SummaryCard = ({
       onKeyDown={(e) => e.key === "Enter" && onSelect()}
       className="bg-white border border-gray-200 rounded-2xl overflow-hidden group cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1 focus:outline-none"
     >
-      {/* Header */}
       <div
         className="rounded-t-2xl px-4 py-4 relative"
         style={{ background: colors.bgcolor }}
@@ -41,9 +40,8 @@ const SummaryCard = ({
           </div>
         </div>
 
-        {/* Delete Button */}
         <button
-          className="absolute top-3 right-3 hidden group-hover:flex items-center gap-1 text-xs text-rose-600 font-medium bg-rose-100 hover:bg-rose-200 px-2.5 py-1 rounded-full transition"
+          className="absolute top-3 right-3 flex md:hidden md:group-hover:flex items-center gap-1 text-xs text-rose-600 font-medium bg-rose-100 hover:bg-rose-200 px-2.5 py-1 rounded-full transition"
           onClick={(e) => {
             e.stopPropagation();
             onDelete();
@@ -54,9 +52,7 @@ const SummaryCard = ({
         </button>
       </div>
 
-      {/* Footer */}
       <div className="px-4 pb-4 pt-3">
-        {/* Info Badges */}
         <div className="flex flex-wrap gap-2 mb-2">
           <span className="text-[11px] font-medium text-gray-700 bg-gray-100 px-3 py-1 rounded-full">
             Experience: {Math.max(0, experience)}{" "}
@@ -70,8 +66,7 @@ const SummaryCard = ({
           </span>
         </div>
 
-        {/* Description */}
-        <p className="text-[13px] text-gray-600 font-normal line-clamp-2">
+        <p className="text-[13px] text-gray-600 font-normal line-clamp-2 md:line-clamp-2">
           {description}
         </p>
       </div>

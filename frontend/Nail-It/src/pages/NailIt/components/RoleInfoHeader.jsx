@@ -5,7 +5,7 @@ const RoleInfoHeader = ({
   topicsToFocus,
   experience,
   questions,
-  description, // currently unused; optionally render or remove
+  description,
   lastUpdated,
 }) => {
   return (
@@ -22,13 +22,13 @@ const RoleInfoHeader = ({
           </div>
 
           <div className="flex flex-wrap items-center gap-3 mt-4 max-w-full">
-            <div className="text-xs sm:text-sm font-semibold text-white bg-black px-3 py-1 rounded-full whitespace-nowrap">
+            <div className="text-sm sm:text-sm font-semibold text-white bg-black px-3 py-1 rounded-full whitespace-nowrap">
               Experience: {experience} {experience === 1 ? "Year" : "Years"}
             </div>
-            <div className="text-xs sm:text-sm font-semibold text-white bg-black px-3 py-1 rounded-full whitespace-nowrap">
+            <div className="text-sm sm:text-sm font-semibold text-white bg-black px-3 py-1 rounded-full whitespace-nowrap">
               {questions} Q&A
             </div>
-            <div className="text-xs sm:text-sm font-semibold text-white bg-black px-3 py-1 rounded-full whitespace-nowrap">
+            <div className="text-sm sm:text-sm font-semibold text-white bg-black px-3 py-1 rounded-full whitespace-nowrap">
               Last Updated: {lastUpdated}
             </div>
           </div>

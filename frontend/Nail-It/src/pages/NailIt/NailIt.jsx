@@ -97,34 +97,33 @@ const NailIt = () => {
       // Should be an array like [{question, answer},....]
       const generatedQuestions = aiResponse.data;
 
-      const response=await axiosInstance.post(
+      const response = await axiosInstance.post(
         API_PATHS.QUESTION.ADD_TO_SESSION,
         {
           sessionId,
-          questions: generatedQuestions
+          questions: generatedQuestions,
         }
       );
 
-      if(response.data){
-        toast.success("Added  more Q&A!!")
+      if (response.data) {
+        toast.success("Added  more Q&A!!");
         fetchSessionDetailsById();
       }
-    } catch(error){
-      if(error.response&&error.response.data.message){
-        setError(error.response.data.message)
-      }else{
-        setError("Something went wrong. Please try again.")
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        setErrorMsg(error.response.data.message);
+      } else {
+        setErrorMsg("Something went wrong. Please try again.");
       }
-    }finally{
-      setIsUpdateLoader(false)
+    } finally {
+      setIsUpdateLoader(false);
     }
   };
-
+  
   useEffect(() => {
     if (sessionId) {
       fetchSessionDetailsById();
     }
-
     return () => {};
   }, []);
 
