@@ -29,7 +29,8 @@ exports.addQuestionsToSession = async (req, res) => {
     session.questions.push(...createdQuestions.map((q) => q._id));
     await session.save();
 
-    res.status(500).json(createdQuestions);
+    res.status(200).json(createdQuestions);
+
   } catch (error) {
     res.status(500).json({ success: false, message: "Server Error" });
   }

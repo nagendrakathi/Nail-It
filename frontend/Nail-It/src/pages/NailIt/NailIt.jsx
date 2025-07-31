@@ -9,10 +9,10 @@ import DashboardLayout from "../../components/layouts/DashboardLayout";
 import RoleInfoHeader from "./components/RoleInfoHeader";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
-import QuestionCard from "../../components/Cards/QuestionCard"
+import QuestionCard from "../../components/Cards/QuestionCard";
 import axios from "axios";
 import SkeletonLoader from "../../components/Loader/SkeletonLoader";
-import Drawer from "../../components/Drawer"
+import Drawer from "../../components/Drawer";
 import AIResponsePreview from "./components/AIResponsePreview";
 
 const NailIt = () => {
@@ -41,46 +41,84 @@ const NailIt = () => {
   };
 
   const generateConceptExplanation = async (question) => {
-    try{
+    try {
       setErrorMsg("");
-      setExplanation(null)
-      
-      setIsLoading(true)
-      setopenLearnMoreDrawer(true)
+      setExplanation(null);
 
-      const response=await axiosInstance.post(
-        API_PATHS.AI.GENERATE_EXPLANATION,{question}
+      setIsLoading(true);
+      setopenLearnMoreDrawer(true);
+
+      const response = await axiosInstance.post(
+        API_PATHS.AI.GENERATE_EXPLANATION,
+        { question }
       );
 
-      if(response.data){
-        setExplanation(response.data)
+      if (response.data) {
+        setExplanation(response.data);
       }
-    }catch(error){
-      setExplanation(null)
-      setErrorMsg("Failed to generate explantion, Try again later.")
-      console.error("Error:", error)
-    }finally{
-      setIsLoading(false)
+    } catch (error) {
+      setExplanation(null);
+      setErrorMsg("Failed to generate explantion, Try again later.");
+      console.error("Error:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const toggleQuestionPinStatus = async (questionId) => {
-    try{
-      const response=await axiosInstance.post(
+    try {
+      const response = await axiosInstance.post(
         API_PATHS.QUESTION.PIN(questionId)
       );
 
-      console.log(response)
+      console.log(response);
 
-      if(response.data && response.data.question){
+      if (response.data && response.data.question) {
         fetchSessionDetailsById();
       }
-    }catch(error){
-      console.error("Error:", error)
+    } catch (error) {
+      console.error("Error:", error);
     }
   };
 
-  const uploadMoreQuestions = async () => {};
+  const uploadMoreQuestions = async () => {
+    try {
+      setIsUpdateLoader(true);
+
+      const aiResponse = await axiosInstance.post(
+        API_PATHS.AI.GENERATE_QUESTIONS,
+        {
+          role: sessionData?.role,
+          experience: sessionData?.experience,
+          topicsToFocus: sessionData?.topicsToFocus,
+          numberOfQuestions: 10,
+        }
+      );
+      // Should be an array like [{question, answer},....]
+      const generatedQuestions = aiResponse.data;
+
+      const response=await axiosInstance.post(
+        API_PATHS.QUESTION.ADD_TO_SESSION,
+        {
+          sessionId,
+          questions: generatedQuestions
+        }
+      );
+
+      if(response.data){
+        toast.success("Added  more Q&A!!")
+        fetchSessionDetailsById();
+      }
+    } catch(error){
+      if(error.response&&error.response.data.message){
+        setError(error.response.data.message)
+      }else{
+        setError("Something went wrong. Please try again.")
+      }
+    }finally{
+      setIsUpdateLoader(false)
+    }
+  };
 
   useEffect(() => {
     if (sessionId) {
@@ -140,6 +178,24 @@ const NailIt = () => {
                         isPinned={data?.isPinned}
                         onTogglePin={() => toggleQuestionPinStatus(data._id)}
                       />
+
+                      {!isLoading &&
+                        sessionData?.questions?.length == index + 1 && (
+                          <div className="flex items-center justify-center mt-5">
+                            <button
+                              className="flex items-center gap-3 text-sm text-white font-medium bg-black px-5 py-2 mr-2 rounded text-nowrap cursor-pointer "
+                              disabled={isLoading || isUpdateLoader}
+                              onClick={uploadMoreQuestions}
+                            >
+                              {isUpdateLoader ? (
+                                <SpinnerLoader />
+                              ) : (
+                                <LuListCollapse className="text-lg" />
+                              )}{" "}
+                              Load More
+                            </button>
+                          </div>
+                        )}
                     </>
                   </motion.div>
                 );
@@ -150,17 +206,18 @@ const NailIt = () => {
         <div>
           <Drawer
             isOpen={openLearnMoreDrawer}
-            onClose={()=>setopenLearnMoreDrawer(false)}
-            title={!isLoading&&explanation?.title}
+            onClose={() => setopenLearnMoreDrawer(false)}
+            title={!isLoading && explanation?.title}
           >
-            {errorMsg&&(
+            {errorMsg && (
               <p className="xt-smfelx gap-2 text-sm text-amber-600 font-medium">
-                <LuCircleAlert className="mt-1"/>{errorMsg}
+                <LuCircleAlert className="mt-1" />
+                {errorMsg}
               </p>
             )}
-            {isLoading&&<SkeletonLoader/>}
-            {!isLoading&& explanation&&(
-              <AIResponsePreview content={explanation?.explanation}/>
+            {isLoading && <SkeletonLoader />}
+            {!isLoading && explanation && (
+              <AIResponsePreview content={explanation?.explanation} />
             )}
           </Drawer>
         </div>
