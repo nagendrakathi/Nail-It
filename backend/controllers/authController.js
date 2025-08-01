@@ -2,9 +2,7 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const generateToken = (userId) => {
-  return jwt.sign({ id: userId }, process.env.JWT_SECRET, { expiresIn: "7d" });
-};
+// Returns an absolute HTTPS URL for profile images
 
 const getFullProfileImageUrl = (url) => {
   if (!url) return "";
@@ -18,6 +16,11 @@ const getFullProfileImageUrl = (url) => {
   return `${base}${url}`;
 };
 
+const generateToken = (userId) => {
+  return jwt.sign({ id: userId }, process.env.JWT_SECRET, { expiresIn: "7d" });
+};
+
+// Register
 const registerUser = async (req, res) => {
   try {
     const { name, email, password, profileImageUrl } = req.body;
@@ -30,18 +33,17 @@ const registerUser = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Save only relative URL if possible (best practice)
-    let sanitizedImageUrl = profileImageUrl;
-    if (sanitizedImageUrl && sanitizedImageUrl.startsWith("http")) {
-      // Optionally: extract just the path part if needed
-      sanitizedImageUrl = ""; // Or parse out the relative path from the URL if sent
+    // Save only relative if local file path, otherwise clear
+    let savedImageUrl = profileImageUrl;
+    if (savedImageUrl && savedImageUrl.startsWith("http")) {
+      savedImageUrl = ""; // drop external images, store only local paths in DB
     }
 
     const user = await User.create({
       name,
       email,
       password: hashedPassword,
-      profileImageUrl: sanitizedImageUrl || "", // save blank/relative only
+      profileImageUrl: savedImageUrl || "",
     });
 
     res.status(201).json({
@@ -56,28 +58,26 @@ const registerUser = async (req, res) => {
   }
 };
 
-//@desc Login user
-//@route POST /api/auth/login
-//@access Public
+// Login
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(500).json({ message: "Invalid email or password" });
+      return res.status(401).json({ message: "Invalid email or password" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(500).json({ message: "Invalid email or password" });
+      return res.status(401).json({ message: "Invalid email or password" });
     }
 
     res.json({
       _id: user._id,
       name: user.name,
       email: user.email,
-      profileImageUrl: user.profileImageUrl,
+      profileImageUrl: getFullProfileImageUrl(user.profileImageUrl),
       token: generateToken(user._id),
     });
   } catch (error) {
@@ -85,19 +85,22 @@ const loginUser = async (req, res) => {
   }
 };
 
-//@desc Get user profile
-//@route GET /api/auth/profile
-//@access Private (Requires JWT)
+// Get profile (JWT protected)
 const getUserProfile = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    res.json(user);
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      profileImageUrl: getFullProfileImageUrl(user.profileImageUrl),
+    });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
 
-module.exports = { registerUser, loginUser, getUserProfile};
+module.exports = { registerUser, loginUser, getUserProfile };
