@@ -17,7 +17,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://nail-it-md12.onrender.com",
+    origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
