@@ -6,9 +6,18 @@ const generateToken = (userId) => {
   return jwt.sign({ id: userId }, process.env.JWT_SECRET, { expiresIn: "7d" });
 };
 
-//@desc Register a new user
-//@route POST /api/auth/register
-//@access Public
+const getFullProfileImageUrl = (url) => {
+  if (!url) return "";
+  if (url.startsWith("http://")) {
+    return url.replace(/^http:\/\//, "https://");
+  }
+  if (url.startsWith("https://")) {
+    return url;
+  }
+  const base = process.env.BACKEND_BASE_URL || "https://nail-it-9qwl.onrender.com";
+  return `${base}${url}`;
+};
+
 const registerUser = async (req, res) => {
   try {
     const { name, email, password, profileImageUrl } = req.body;
@@ -21,18 +30,25 @@ const registerUser = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
+    // Save only relative URL if possible (best practice)
+    let sanitizedImageUrl = profileImageUrl;
+    if (sanitizedImageUrl && sanitizedImageUrl.startsWith("http")) {
+      // Optionally: extract just the path part if needed
+      sanitizedImageUrl = ""; // Or parse out the relative path from the URL if sent
+    }
+
     const user = await User.create({
       name,
       email,
       password: hashedPassword,
-      profileImageUrl,
+      profileImageUrl: sanitizedImageUrl || "", // save blank/relative only
     });
 
     res.status(201).json({
       _id: user._id,
       name: user.name,
       email: user.email,
-      profileImageUrl: user.profileImageUrl,
+      profileImageUrl: getFullProfileImageUrl(user.profileImageUrl),
       token: generateToken(user._id),
     });
   } catch (error) {
