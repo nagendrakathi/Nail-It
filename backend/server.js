@@ -17,7 +17,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://nail-it-ai.onrender.com",
+    origin: ["https://nail-it-ai.onrender.com"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
