@@ -34,14 +34,16 @@ const LandingPage = () => {
 
         <div className="container mx-auto px-6 pt-6 pb-[200px] relative z-10 max-w-7xl">
           <header className="flex flex-row justify-between items-center gap-4 mb-16">
-            <div className="text-xl font-bold text-black flex-shrink-0">Nail-It</div>
+            <div className="text-xl font-bold text-black flex-shrink-0">
+              Nail-It
+            </div>
             <div className="flex items-center gap-3">
               {user ? (
                 <ProfileInfoCard />
               ) : (
                 <button
                   aria-label="Login or Sign Up"
-                  className="bg-gradient-to-r from-[#FF9324] to-[#e99a4b] text-sm font-semibold text-white px-5 py-2.5 rounded-full hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-amber-500 transition hover:cursor-pointer"
+                  className="bg-gradient-to-r from-[#FF9324] to-[#e99a4b] text-sm font-semibold text-white px-7 py-2.5 rounded-full hover:bg-black hover:text-white border border-white transition-colors cursor-pointer"
                   onClick={() => {
                     setCurrentPage("login");
                     setOpenAuthModal(true);
@@ -72,12 +74,12 @@ const LandingPage = () => {
               <p className="text-[17px] text-gray-900 mb-6">
                 Get skill and role-specific questions, expand answers when you
                 need them, dive deeper into concepts, and organize everything
-                your way. From preparation to mastery - your ultimate toolkit
-                is here.
+                your way. From preparation to mastery - your ultimate toolkit is
+                here.
               </p>
               <button
                 aria-label="Get Started"
-                className="self-start bg-black text-sm font-semibold text-white px-7 py-2.5 rounded-full hover:bg-yellow-100 hover:text-black border border-yellow-50 hover:border-yellow-300 transition focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-black hover:cursor-pointer"
+                className="w-1/4 bg-black text-sm font-semibold text-white px-7 py-2.5 rounded-full hover:bg-yellow-100 hover:text-black border border-yellow-50 hover:border-yellow-300 transition-colors cursor-pointer"
                 onClick={handleCTA}
               >
                 Get Started
