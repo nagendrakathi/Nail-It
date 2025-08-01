@@ -2,13 +2,29 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+// Generate JWT token
 const generateToken = (userId) => {
   return jwt.sign({ id: userId }, process.env.JWT_SECRET, { expiresIn: "7d" });
 };
 
-//@desc Register a new user
-//@route POST /api/auth/register
-//@access Public
+// Sanitize image URL to use HTTPS if needed
+const sanitizeUrl = (url) => {
+  if (!url) return url;
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol === "http:") {
+      parsed.protocol = "https:";
+      return parsed.toString();
+    }
+    return url;
+  } catch (err) {
+    return url; // fallback if URL is invalid
+  }
+};
+
+// @desc    Register a new user
+// @route   POST /api/auth/register
+// @access  Public
 const registerUser = async (req, res) => {
   try {
     const { name, email, password, profileImageUrl } = req.body;
@@ -21,11 +37,13 @@ const registerUser = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
+    const secureProfileImageUrl = sanitizeUrl(profileImageUrl);
+
     const user = await User.create({
       name,
       email,
       password: hashedPassword,
-      profileImageUrl,
+      profileImageUrl: secureProfileImageUrl,
     });
 
     res.status(201).json({
@@ -40,28 +58,28 @@ const registerUser = async (req, res) => {
   }
 };
 
-//@desc Login user
-//@route POST /api/auth/login
-//@access Public
+// @desc    Login user
+// @route   POST /api/auth/login
+// @access  Public
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(500).json({ message: "Invalid email or password" });
+      return res.status(401).json({ message: "Invalid email or password" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(500).json({ message: "Invalid email or password" });
+      return res.status(401).json({ message: "Invalid email or password" });
     }
 
     res.json({
       _id: user._id,
       name: user.name,
       email: user.email,
-      profileImageUrl: user.profileImageUrl,
+      profileImageUrl: sanitizeUrl(user.profileImageUrl),
       token: generateToken(user._id),
     });
   } catch (error) {
@@ -69,19 +87,26 @@ const loginUser = async (req, res) => {
   }
 };
 
-//@desc Get user profile
-//@route GET /api/auth/profile
-//@access Private (Requires JWT)
+// @desc    Get user profile
+// @route   GET /api/auth/profile
+// @access  Private (Requires JWT)
 const getUserProfile = async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
+
+    user.profileImageUrl = sanitizeUrl(user.profileImageUrl);
+
     res.json(user);
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
 
-module.exports = { registerUser, loginUser, getUserProfile};
+module.exports = {
+  registerUser,
+  loginUser,
+  getUserProfile,
+};
