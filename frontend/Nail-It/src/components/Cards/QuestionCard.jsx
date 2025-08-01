@@ -11,6 +11,7 @@ const QuestionCard = ({
 }) => {
   const [isExplained, setIsExplained] = useState(false);
   const [height, setHeight] = useState(0);
+  const [hasClickedLearnMore, setHasClickedLearnMore] = useState(false); 
   const contentRef = useRef(null);
 
   useEffect(() => {
@@ -22,6 +23,11 @@ const QuestionCard = ({
   }, [isExplained]);
 
   const toggleExpand = () => setIsExplained((prev) => !prev);
+
+  const handleLearnMore = () => {
+    onLearnMore(); 
+    setHasClickedLearnMore(true); 
+  };
 
   return (
     <div className="bg-white rounded-lg mb-4 overflow-hidden py-4 px-5 shadow-xl shadow-gray-100/70 border border-gray-100/60 group transition-all">
@@ -39,7 +45,13 @@ const QuestionCard = ({
         </div>
 
         <div className="flex flex-wrap sm:flex-nowrap items-center justify-end gap-2 sm:gap-3">
-          <div className="flex gap-2 sm:opacity-0 sm:group-hover:opacity-100 sm:pointer-events-none sm:group-hover:pointer-events-auto transition-all duration-200">
+          <div
+            className={`flex gap-2 transition-all duration-200 ${
+              hasClickedLearnMore
+                ? "opacity-100 pointer-events-auto"
+                : "sm:opacity-0 sm:group-hover:opacity-100 sm:pointer-events-none sm:group-hover:pointer-events-auto"
+            }`}
+          >
             <button
               className="flex items-center gap-1 text-xs text-indigo-800 font-medium bg-indigo-50 px-3 py-1 rounded border border-indigo-50 hover:border-indigo-200 whitespace-nowrap"
               onClick={onTogglePin}
@@ -50,10 +62,7 @@ const QuestionCard = ({
 
             <button
               className="flex items-center gap-1 text-xs text-cyan-800 font-medium bg-cyan-50 px-3 py-1 rounded border border-cyan-50 hover:border-cyan-200 whitespace-nowrap"
-              onClick={() => {
-                setIsExplained(true);
-                onLearnMore();
-              }}
+              onClick={handleLearnMore}
             >
               <LuSparkles size={14} />
               <span className="hidden md:inline">Learn More</span>

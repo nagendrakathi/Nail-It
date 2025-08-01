@@ -28,7 +28,6 @@ const LandingPage = () => {
       <div className="w-full min-h-full bg-[#FFFCEF]">
         <div className="w-[500px] h-[500px] bg-amber-200/20 blur-[65px] absolute top-0 left-0 z-0"></div>
         <div className="container mx-auto px-4 pt-6 pb-[200px] relative z-10">
-          {/* Header */}
           <header className="flex justify-between items-center mb-16">
             <div className="text-xl text-black font-bold">Nail-It</div>
             {user ? (
@@ -60,7 +59,7 @@ const LandingPage = () => {
             </div>
             <div className="w-full md:w-1/2">
               <p className="text-[17px] text-gray-900 mr-0 md:mr-20 mb-6">
-                Get skill-specific, role-specific questions, expand answers when
+                Get skill and role-specific questions, expand answers when
                 you need them, dive deeper into concepts, and organize
                 everything your way. From preparation to mastery - your ultimate
                 toolkit is here.
@@ -93,7 +92,6 @@ const LandingPage = () => {
                 Features That Make You Shine
               </h2>
               <div className="flex flex-col items-center gap-8">
-                {/* First 3 cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
                   {APP_FEATURES.slice(0, 3).map((feature) => (
                     <div
@@ -108,7 +106,6 @@ const LandingPage = () => {
                   ))}
                 </div>
 
-                {/* Remainin 2 cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {APP_FEATURES.slice(3).map((feature) => (
                     <div
@@ -127,7 +124,7 @@ const LandingPage = () => {
           </div>
         </div>
         <div className="text-sm b-gray-50 text-secondary text-center p-5 mt-5">
-          Made with Passion
+          By Nagendra K 🧢
         </div>
       </div>
       <Modal

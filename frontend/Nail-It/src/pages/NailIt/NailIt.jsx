@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom"; // Added Link import here
 import moment from "moment";
 import { AnimatePresence, motion } from "framer-motion";
 import { LuCircleAlert, LuListCollapse } from "react-icons/lu";
@@ -10,7 +10,6 @@ import RoleInfoHeader from "./components/RoleInfoHeader";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import QuestionCard from "../../components/Cards/QuestionCard";
-import axios from "axios";
 import SkeletonLoader from "../../components/Loader/SkeletonLoader";
 import Drawer from "../../components/Drawer";
 import AIResponsePreview from "./components/AIResponsePreview";
@@ -94,7 +93,6 @@ const NailIt = () => {
           numberOfQuestions: 10,
         }
       );
-      // Should be an array like [{question, answer},....]
       const generatedQuestions = aiResponse.data;
 
       const response = await axiosInstance.post(
@@ -119,7 +117,7 @@ const NailIt = () => {
       setIsUpdateLoader(false);
     }
   };
-  
+
   useEffect(() => {
     if (sessionId) {
       fetchSessionDetailsById();
@@ -142,6 +140,11 @@ const NailIt = () => {
         }
       />
       <div className="container mx-auto pt-4 pb-4 px-4 md:px-0">
+        <div className="mb-4">
+          <Link to="/dashboard" className="text-amber-600 font-medium text-sm">
+            &larr; Back to Dashboard
+          </Link>
+        </div>
         <h2 className="text-lg font-semibold color-black">Interview Q & A</h2>
         <div className="grid grid-cols-12 gap-4 mt-5 mb-10">
           <div
