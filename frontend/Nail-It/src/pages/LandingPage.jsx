@@ -41,7 +41,7 @@ const LandingPage = () => {
               ) : (
                 <button
                   aria-label="Login or Sign Up"
-                  className="bg-gradient-to-r from-[#FF9324] to-[#e99a4b] text-sm font-semibold text-white px-5 py-2.5 rounded-full hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-amber-500 transition cursor-pointer"
+                  className="bg-gradient-to-r from-[#FF9324] to-[#e99a4b] text-sm font-semibold text-white px-5 py-2.5 rounded-full hover:opacity-95 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-amber-500 transition hover:cursor-pointer"
                   onClick={() => {
                     setCurrentPage("login");
                     setOpenAuthModal(true);
