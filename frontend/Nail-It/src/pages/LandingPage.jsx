@@ -77,7 +77,7 @@ const LandingPage = () => {
               </p>
               <button
                 aria-label="Get Started"
-                className="self-start bg-black text-sm font-semibold text-white px-7 py-2.5 rounded-full hover:bg-yellow-100 hover:text-black border border-yellow-50 hover:border-yellow-300 transition focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-black"
+                className="self-start bg-black text-sm font-semibold text-white px-7 py-2.5 rounded-full hover:bg-yellow-100 hover:text-black border border-yellow-50 hover:border-yellow-300 transition focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-black hover:cursor-pointer"
                 onClick={handleCTA}
               >
                 Get Started
