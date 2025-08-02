@@ -22,7 +22,7 @@ if (process.env.NODE_ENV !== "production") {
 
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: '*',
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })

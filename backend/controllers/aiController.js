@@ -1,6 +1,5 @@
 const { GoogleGenAI } = require("@google/genai");
 const {
-  ConceptExplainPrompt,
   questionAnswerPrompt,
   conceptExplainPrompt,
 } = require("../utils/prompts");
