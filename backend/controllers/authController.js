@@ -18,7 +18,7 @@ const sanitizeUrl = (url) => {
     }
     return url;
   } catch (err) {
-    return url; // fallback if URL is invalid
+    return url; 
   }
 };
 

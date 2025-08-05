@@ -17,7 +17,7 @@ const app = express();
 
 const allowedOrigins = ["https://nail-it-ai.onrender.com"];
 if (process.env.NODE_ENV !== "production") {
-  allowedOrigins.push("http://localhost:3000");
+  allowedOrigins.push("http://localhost:5173");
 }
 
 app.use(
@@ -30,7 +30,6 @@ app.use(
 
 connectDB();
 app.use(express.json());
-
 
 // API routes
 app.use("/api/auth", authRoutes);

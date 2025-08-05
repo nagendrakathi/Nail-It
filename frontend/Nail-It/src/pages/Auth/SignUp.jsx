@@ -41,7 +41,7 @@ const SignUp = ({ setCurrentPage }) => {
     try {
       let profileImageUrl = "";
       if (profilePic) {
-        const imgUploadRes = await uploadImage(profilePic); // Should return rel path or https: url as per our system
+        const imgUploadRes = await uploadImage(profilePic);
         profileImageUrl = imgUploadRes.imageUrl || "";
       }
       const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
