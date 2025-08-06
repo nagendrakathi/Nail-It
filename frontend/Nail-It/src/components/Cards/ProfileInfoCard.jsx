@@ -6,6 +6,8 @@ const ProfileInfoCard = () => {
   const { user, clearUser } = useContext(UserContext);
   const navigate = useNavigate();
 
+  
+
   const handleLogout = () => {
     localStorage.clear();
     clearUser();
@@ -13,7 +15,7 @@ const ProfileInfoCard = () => {
   };
   return (
     user && (
-      <div className="flex items-center">
+      <div className="flex items-center hover:cursor-pointer">
         <img
           src={user.profileImageUrl}
           alt=""
@@ -24,7 +26,7 @@ const ProfileInfoCard = () => {
             {user.name || ""}
           </div>
           <button
-            className="text-amber-600 text-sm font-semibold cursor-pointer "
+            className="text-amber-600 text-sm font-semibold cursor-pointer underline"
             onClick={handleLogout}
           >
             Logout
