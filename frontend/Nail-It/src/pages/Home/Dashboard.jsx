@@ -79,7 +79,7 @@ const Dashboard = () => {
           onClick={() => setOpenCreateModal(true)}
         >
           <LuPlus className="text-2xl text-white" />
-          Add New
+          New Session
         </button>
       </div>
       <Modal
