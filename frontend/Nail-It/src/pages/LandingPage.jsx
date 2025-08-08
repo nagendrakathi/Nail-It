@@ -26,7 +26,7 @@ const LandingPage = () => {
 
   return (
     <>
-      <div className="w-full min-h-full bg-[#FFFCEF] relative overflow-hidden">
+      <div className="w-full min-h-full bg-[#FFFCEF] relative overflow-hidden ">
         <div
           aria-hidden="true"
           className="absolute top-0 left-0 w-[400px] h-[400px] sm:w-[500px] sm:h-[500px] bg-amber-200/20 blur-[65px] rounded-full pointer-events-none"
