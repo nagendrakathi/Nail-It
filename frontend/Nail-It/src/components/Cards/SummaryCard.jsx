@@ -19,7 +19,7 @@ const SummaryCard = ({
       role="button"
       tabIndex={0}
       onKeyDown={(e) => e.key === "Enter" && onSelect()}
-      className="bg-white border border-gray-200 rounded-2xl overflow-hidden group cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1 focus:outline-none"
+      className="bg-white border border-gray-200 rounded-2xl overflow-hidden group cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1 focus:outline-none md:mx-2"
     >
       <div
         className="rounded-t-2xl px-4 py-4 relative"

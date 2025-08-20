@@ -13,7 +13,7 @@ const ProfileInfoCard = () => {
   };
   return (
     user && (
-      <div className="flex items-center hover:cursor-pointer">
+      <div className="flex items-center hover:cursor-pointer pr-10">
         <img
           src={user.profileImageUrl}
           alt=""

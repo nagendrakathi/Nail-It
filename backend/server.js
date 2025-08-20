@@ -41,9 +41,9 @@ app.use("/api/ai/generate-explanation", protect, generateConceptExplanation);
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-app.use((req, res, next) => {
-  res.status(404).json({ message: "API endpoint not found" });
-});
+// app.use((req, res, next) => {
+//   res.status(404).json({ message: "API endpoint not found" });
+// });
 
 app.use((err, req, res, next) => {
   res.status(500).json({ message: "Server error", error: err.message });

@@ -2,7 +2,9 @@ const express = require("express");
 const {
   registerUser,
   loginUser,
-  getUserProfile
+  getUserProfile,
+  deleteAccount,
+  updateProfile
 } = require("../controllers/authController");
 const { protect } = require("../middlewares/authMiddleware");
 const upload = require("../middlewares/uploadMiddleware");
@@ -13,7 +15,11 @@ const router = express.Router();
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.get("/profile", protect, getUserProfile);
+router.delete("/delete-account", protect, deleteAccount);
+router.patch("/update-profile", protect, updateProfile );
 
+//@desc   Upload profile image
+//@route  POST /api/auth/upload-image
 router.post("/upload-image", upload.single("image"), (req, res) => {
   if (!req.file || !req.file.path) {
     return res.status(400).json({ message: "No file uploaded" });

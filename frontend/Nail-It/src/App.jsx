@@ -12,7 +12,8 @@ const App = () => {
       <div>
         <Router>
           <Routes>
-            {/*Default Routes*/}K
+            {/*Default Routes*/}
+
             <Route path="/" element={<LandingPage />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/nail-it/:sessionId" element={<NailIt />} />
