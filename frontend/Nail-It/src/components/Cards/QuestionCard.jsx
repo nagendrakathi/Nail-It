@@ -30,7 +30,7 @@ const QuestionCard = ({
   };
 
   return (
-    <div className="bg-white rounded-lg mb-4 overflow-hidden py-4 px-5 shadow-xl shadow-gray-100/70 border border-gray-100/60 group transition-all">
+    <div className="bg-white rounded-lg mb-4 overflow-hidden py-4 px-5 shadow-xl shadow-gray-100/70 border border-gray-100/60 group transition-all ">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 w-full">
         <div
           className="flex flex-1 items-start gap-3.5 w-full sm:w-0 min-w-0 cursor-pointer"

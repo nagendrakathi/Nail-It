@@ -123,6 +123,7 @@ const NailIt = () => {
       fetchSessionDetailsById();
     }
     return () => {};
+    //eslint-disable-next-line react-hooks/exhaustive-deps 
   }, []);
 
   return (
@@ -139,7 +140,7 @@ const NailIt = () => {
             : ""
         }
       />
-      <div className="container mx-auto pt-4 pb-4 px-10">
+      <div className="container mx-auto pt-4 pb-4 px-4 md:px-10">
         <div className="mb-4">
           <Link to="/dashboard" className="text-amber-600 font-medium text-sm">
             &larr; Back to Dashboard
