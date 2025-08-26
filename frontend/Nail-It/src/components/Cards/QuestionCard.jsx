@@ -53,7 +53,7 @@ const QuestionCard = ({
             }`}
           >
             <button
-              className="flex items-center gap-1 text-xs text-indigo-800 font-medium bg-indigo-50 px-3 py-1 rounded border border-indigo-50 hover:border-indigo-200 whitespace-nowrap"
+              className="flex items-center gap-1 text-xs text-indigo-800 font-medium bg-indigo-50 px-3 py-1 rounded border border-indigo-50 hover:border-indigo-200 whitespace-nowrap cursor-pointer"
               onClick={onTogglePin}
             >
               {isPinned ? <LuPinOff size={14} /> : <LuPin size={14} />}
@@ -61,7 +61,7 @@ const QuestionCard = ({
             </button>
 
             <button
-              className="flex items-center gap-1 text-xs text-cyan-800 font-medium bg-cyan-50 px-3 py-1 rounded border border-cyan-50 hover:border-cyan-200 whitespace-nowrap"
+              className="flex items-center gap-1 text-xs text-cyan-800 font-medium bg-cyan-50 px-3 py-1 rounded border border-cyan-50 hover:border-cyan-200 whitespace-nowrap cursor-pointer"
               onClick={handleLearnMore}
             >
               <LuSparkles size={14} />
@@ -70,7 +70,7 @@ const QuestionCard = ({
           </div>
 
           <button
-            className="text-gray-400 hover:text-gray-500 transition"
+            className="text-gray-400 hover:text-gray-500 transition cursor-pointer"
             onClick={toggleExpand}
           >
             <LuChevronDown
