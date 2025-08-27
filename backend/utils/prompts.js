@@ -2,7 +2,8 @@ const questionAnswerPrompt = (
   role,
   experience,
   topicsToFocus,
-  numberOfQuestions
+  numberOfQuestions,
+  previousQuestions = []
 ) =>
   `You are an AI trained to generate technical interview questions and answers.
 
@@ -15,6 +16,16 @@ Task:
 - If the answer needs a code example, add a small code block inside.
 - Keep formatting very clean.
 - Return a pure JSON array like:
+
+${
+  previousQuestions.length > 0
+    ? `- Avoid repeating the *exact same* questions from before: ${JSON.stringify(
+        previousQuestions
+      )}
+- However, it is allowed to generate related or rephrased questions, even if they explore overlapping concepts (this ensures coverage and variation).
+- You may also increase the difficulty slightly compared to previous ones.`
+    : ""
+}
 
 [
   {

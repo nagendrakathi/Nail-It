@@ -91,6 +91,8 @@ const NailIt = () => {
           experience: sessionData?.experience,
           topicsToFocus: sessionData?.topicsToFocus,
           numberOfQuestions: 10,
+          previousQuestions:
+            sessionData?.questions?.map((q) => q.question) || [],
         }
       );
       const generatedQuestions = aiResponse.data;
@@ -123,7 +125,7 @@ const NailIt = () => {
       fetchSessionDetailsById();
     }
     return () => {};
-    //eslint-disable-next-line react-hooks/exhaustive-deps 
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -140,10 +142,21 @@ const NailIt = () => {
             : ""
         }
       />
-      <div className="container mx-auto pt-4 pb-4 px-4 md:px-10">
+      <div className="w-full mx-auto pt-4 pb-4 px-4 md:px-10">
         <div className="mb-4">
-          <Link to="/dashboard" className="text-amber-600 font-medium text-sm">
-            &larr; Back to Dashboard
+          <Link to="/dashboard" className="flex items-center gap-1 text-amber-600 font-medium text-sm hover:-translate-x-1 transition-transform">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              x="0px"
+              y="0px"
+              width="100"
+              height="100"
+              viewBox="0 0 72 72"
+              className="size-4 fill-amber-600"
+            >
+              <path d="M 35.078125 13.808594 C 34.033125 13.808594 32.990078 14.216344 32.205078 15.027344 L 14.591797 33.21875 C 13.090797 34.76975 13.090797 37.232203 14.591797 38.783203 L 32.205078 56.974609 C 33.743078 58.561609 36.275328 58.600453 37.861328 57.064453 C 39.448328 55.528453 39.489125 52.995203 37.953125 51.408203 L 23.03125 36 L 37.953125 20.591797 C 39.489125 19.004797 39.448328 16.472547 37.861328 14.935547 C 37.085328 14.183547 36.081125 13.808594 35.078125 13.808594 z M 54.535156 13.808594 C 53.490156 13.808594 52.445156 14.216344 51.660156 15.027344 L 34.046875 33.21875 C 32.545875 34.76975 32.545875 37.232203 34.046875 38.783203 L 51.660156 56.974609 C 53.198156 58.561609 55.730406 58.600453 57.316406 57.064453 C 58.903406 55.528453 58.944203 52.995203 57.408203 51.408203 L 42.488281 36 L 57.408203 20.591797 C 58.944203 19.004797 58.903406 16.472547 57.316406 14.935547 C 56.540406 14.183547 55.538156 13.808594 54.535156 13.808594 z"></path>
+            </svg>{" "}
+            Back to Dashboard
           </Link>
         </div>
         <h2 className="text-lg font-semibold color-black">Interview Q & A</h2>
@@ -158,15 +171,15 @@ const NailIt = () => {
                 return (
                   <motion.div
                     key={data._id || index}
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
+                    initial={{ opacity: 0, y: 30, scale: 0.95 }} 
+                    animate={{ opacity: 1, y: 0, scale: 1 }} 
+                    exit={{ opacity: 0, y: -20, scale: 0.9 }}
                     transition={{
-                      duration: 0.4,
                       type: "spring",
-                      stiffness: 100,
-                      delay: index * 0.1,
-                      damping: 15,
+                      stiffness: 80, 
+                      damping: 18, 
+                      mass: 0.8, 
+                      delay: index * 0.07, 
                     }}
                     layout
                     layoutId={`question-${data._id || index}`}
@@ -195,7 +208,7 @@ const NailIt = () => {
                               ) : (
                                 <LuListCollapse className="text-lg" />
                               )}{" "}
-                              Load More
+                              {isUpdateLoader ? "Loading..." : "Load More"}
                             </button>
                           </div>
                         )}

@@ -11,7 +11,7 @@ const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 // @access   Private
 const generateInterviewQuestions = async (req, res) => {
   try {
-    const { role, experience, topicsToFocus, numberOfQuestions } = req.body;
+    const { role, experience, topicsToFocus, numberOfQuestions, prevQuestions } = req.body;
 
     if (!role || !experience || !topicsToFocus || !numberOfQuestions) {
       return res.status(400).json({ message: "Missing required fields" });
@@ -21,7 +21,8 @@ const generateInterviewQuestions = async (req, res) => {
       role,
       experience,
       topicsToFocus,
-      numberOfQuestions
+      numberOfQuestions,
+      prevQuestions || []
     );
     const response = await ai.models.generateContent({
       model: "gemini-2.0-flash-lite",

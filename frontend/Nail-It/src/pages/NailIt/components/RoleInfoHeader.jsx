@@ -10,7 +10,7 @@ const RoleInfoHeader = ({
 }) => {
   return (
     <div className="bg-white relative overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 md:px-10">
+      <div className="w-full mx-auto px-4 sm:px-6 md:px-10">
         <div className="h-[200px] flex flex-col justify-center relative z-10">
           <div>
             <div className="flex justify-between items-start">

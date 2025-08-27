@@ -32,7 +32,7 @@ const LandingPage = () => {
           className="absolute top-0 left-0 w-[400px] h-[400px] sm:w-[500px] sm:h-[500px] bg-amber-200/20 blur-[65px] rounded-full pointer-events-none"
         ></div>
 
-        <div className="container mx-auto px-6 pt-6 pb-[200px] relative z-10 max-w-7xl">
+        <div className="w-full mx-5 px-10 pt-6 pb-[200px] relative z-10">
           <header className="flex flex-row justify-between items-center gap-4 mb-16">
             <div className="text-xl font-bold text-black flex-shrink-0">
               Nail-It
@@ -43,7 +43,7 @@ const LandingPage = () => {
               ) : (
                 <button
                   aria-label="Login or Sign Up"
-                  className="bg-gradient-to-r from-[#FF9324] to-[#e99a4b] text-sm font-semibold text-white px-7 py-2.5 rounded-full hover:bg-black hover:text-white border border-white transition-colors cursor-pointer"
+                  className="bg-gradient-to-r from-[#FF9324] to-[#e99a4b] text-sm font-semibold text-white px-7 py-2.5 rounded-full hover:bg-black hover:text-white border border-white transition-colors cursor-pointer hover:scale-[1.009] hover:shadow-lg hover:bg-gradient-to-r hover:from-[#FF9324] hover:to-[#e99a4b]"
                   onClick={() => {
                     setCurrentPage("login");
                     setOpenAuthModal(true);
@@ -79,7 +79,7 @@ const LandingPage = () => {
               </p>
               <button
                 aria-label="Get Started"
-                className="w-1/4 bg-black text-sm font-semibold text-white px-7 py-2.5 rounded-full hover:bg-yellow-100 hover:text-black border border-yellow-50 hover:border-yellow-300 transition-colors cursor-pointer"
+                className="w-fit bg-black text-sm font-semibold text-white px-7 py-3 rounded-full hover:bg-yellow-100 hover:text-black border border-yellow-50 hover:border-yellow-300 transition-colors cursor-pointer"
                 onClick={handleCTA}
               >
                 Get Started
@@ -98,7 +98,7 @@ const LandingPage = () => {
           />
         </section>
         <div className="w-full min-h-full bg-[#FFFCEF] mt-10">
-          <div className="container mx-auto px-6 pt-10 pb-20 max-w-7xl">
+          <div className="w-full mx-auto px-6 pt-10 pb-20 max-w-7xl">
             <section className="mt-5">
               <h2 className="text-2xl font-medium text-center mb-12">
                 Features That Make You Shine
