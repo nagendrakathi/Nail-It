@@ -30,6 +30,7 @@ const UserProvider = ({ children }) => {
     };
 
     fetchUser();
+    //
   }, []);
 
   const updateUser = (userData) => {

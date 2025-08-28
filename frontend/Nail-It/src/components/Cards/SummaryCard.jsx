@@ -41,7 +41,7 @@ const SummaryCard = ({
         </div>
 
         <button
-          className="absolute top-3 right-3 flex md:hidden md:group-hover:flex items-center gap-1 text-xs text-rose-600 font-medium bg-rose-100 hover:bg-rose-200 px-2.5 py-1 rounded-full transition"
+          className="absolute top-3 cursor-pointer right-3 flex md:hidden md:group-hover:flex items-center gap-1 text-xs text-rose-600 font-medium bg-rose-100 hover:bg-rose-200 px-2.5 py-1 rounded-full transition"
           onClick={(e) => {
             e.stopPropagation();
             onDelete();

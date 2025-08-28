@@ -16,7 +16,7 @@ const Drawer = ({ isOpen, onClose, title, children }) => {
           {title}
         </h5>
         {/* Close button */}
-        <button type="button" onClick={onClose} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gary-900 rounded-lg text-sm h-8 inline-flex items-center justify-center">
+        <button type="button" onClick={onClose} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gary-900 rounded-full text-sm h-8 w-8 inline-flex items-center justify-center cursor-pointer">
           <LuX className="text-lg"/>
         </button>
       </div>

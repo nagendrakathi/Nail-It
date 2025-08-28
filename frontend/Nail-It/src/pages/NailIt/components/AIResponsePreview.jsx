@@ -171,7 +171,7 @@ function CodeBlock({ code, language }) {
 
         <button
           onClick={copyCode}
-          className="text-gray-500 hover:text-gray-700 focus:outline-none relative group"
+          className="text-gray-500 hover:text-gray-700 focus:outline-none relative group cursor-pointer"
           aria-label="Copy Code"
         >
           {copied ? (

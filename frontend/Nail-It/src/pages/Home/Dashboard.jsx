@@ -52,8 +52,8 @@ const Dashboard = () => {
   }, []);
   return (
     <DashboardLayout>
-      <div className="w-full px-3 pt-4 pb-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-7 pt-1 pb-6 pr-4 md:pr-0">
+      <div className="w-full px-3 py-4 md:py-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 p-3 md:p-0">
           {sessions?.map((data, index) => (
             <SummaryCard
               key={data?._id}

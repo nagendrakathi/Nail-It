@@ -32,7 +32,7 @@ const LandingPage = () => {
           className="absolute top-0 left-0 w-[400px] h-[400px] sm:w-[500px] sm:h-[500px] bg-amber-200/20 blur-[65px] rounded-full pointer-events-none"
         ></div>
 
-        <div className="w-full mx-5 px-10 pt-6 pb-[200px] relative z-10">
+        <div className="w-full px-5 md:px-20 pt-6 pb-[200px] relative z-10">
           <header className="flex flex-row justify-between items-center gap-4 mb-16">
             <div className="text-xl font-bold text-black flex-shrink-0">
               Nail-It
