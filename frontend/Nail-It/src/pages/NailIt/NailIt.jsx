@@ -143,7 +143,7 @@ const NailIt = () => {
         }
       />
       <div className="w-full mx-auto pt-4 pb-4 px-4 md:px-10">
-        <div className="mb-4">
+        <div className="mb-4 w-fit">
           <Link to="/dashboard" className="flex items-center gap-1 text-amber-600 font-medium text-sm hover:-translate-x-1 transition-transform">
             <svg
               xmlns="http://www.w3.org/2000/svg"
