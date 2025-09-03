@@ -7,6 +7,7 @@ export const UserContext = createContext();
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [sessions, setSessions] = useState([]);
 
   useEffect(() => {
     if (user) return;
@@ -43,6 +44,18 @@ const UserProvider = ({ children }) => {
     setUser(null);
     localStorage.removeItem("token");
   };
+
+  // const fetchAllSessions = async () => {
+  //   try {
+  //     const response = await axiosInstance.get(API_PATHS.SESSION.GET_ALL);
+  //     setSessions(response.data);
+  //   } catch (error) {
+  //     console.error("Error fetching session data:", error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   fetchAllSessions();
+  // }, []);
 
   return (
     <UserContext.Provider value={{ user, loading, updateUser, clearUser }}>

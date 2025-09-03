@@ -1,34 +1,53 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
 import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/Home/Dashboard";
 import NailIt from "./pages/NailIt/NailIt";
-import UserProvider from "./context/userContext";
+import { UserContext } from "./context/userContext";
+import { useContext } from "react";
+import Profile from "./pages/Auth/Profile";
 
 const App = () => {
+  const { user } = useContext(UserContext);
   return (
-    <UserProvider>
-      <div>
-        <Router>
-          <Routes>
-            {/*Default Routes*/}
+    <div>
+      <Router>
+        <Routes>
+          {/*Default Routes*/}
+          <Route
+            path="/"
+            element={!user ? <LandingPage /> : <Navigate to="/dashboard" />}
+          />
 
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/nail-it/:sessionId" element={<NailIt />} />
-          </Routes>
-        </Router>
-        <Toaster
-          toastOptions={{
-            className: "",
-            style: {
-              fontSize: "13px",
-            },
-          }}
-        />
-      </div>
-    </UserProvider>
+          <Route
+            path="/dashboard"
+            element={user ? <Dashboard /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/dashboard/profile"
+            element={user ? <Profile /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/nail-it/:sessionId"
+            element={user ? <NailIt /> : <Navigate to="/" />}
+          />
+        </Routes>
+      </Router>
+      <Toaster
+        toastOptions={{
+          className: "",
+          style: {
+            fontSize: "13px",
+          },
+        }}
+      />
+    </div>
   );
 };
 
