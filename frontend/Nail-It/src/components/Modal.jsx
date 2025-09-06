@@ -33,7 +33,7 @@ const Modal = ({children, isOpen, onClose, title, hideHeader}) => {
               />
           </svg>
       </button>
-      {/* Modla Body (Scrollable) */}
+      {/* Modal Body (Scrollable) */}
       <div className="flex-1 overflow-y-auto custom-scrollbar">
         {children}
       </div>
